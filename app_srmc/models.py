@@ -35,7 +35,7 @@ class Cad_produtor(models.Model):
     cpf = BRCPFField(required=False)
     rg = models.CharField(max_length=255, null=True, blank=True)
     telefone = BRPhoneNumberField()
-    email = models.EmailField(max_length=255)
+    email = models.EmailField(max_length=255, null=True,  blank=True)
     uf = models.CharField(max_length=2, blank=True, null=True)
     municipio = models.ForeignKey(Municipio, blank=True, null=True, verbose_name=u'município')
     cep = BRZipCodeField()
@@ -54,12 +54,12 @@ class Cad_produtor(models.Model):
 #
 class Cad_endereco_propriedade(models.Model):
     nome_propriedade = 	models.CharField(max_length=255, verbose_name=u'Nome da Propriedade')
-    endereco = models.CharField(max_length=255, verbose_name=u'Endere�o', blank=True, null=True)
+    endereco = models.CharField(max_length=255, verbose_name=u'Endereço', blank=True, null=True)
     lote = models.CharField(max_length=255, verbose_name=u'lote', blank=True, null=True)
     gleba = models.CharField(max_length=255, verbose_name=u'gleba', blank=True, null=True)
     licenca_ambiental = models.CharField(max_length=255, verbose_name=u'gleba', blank=True, null=True)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
 
     def __unicode__(self):
         return self.nome_propriedade
