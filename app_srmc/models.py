@@ -1,6 +1,5 @@
 ﻿# coding: utf-8
 from django.db import models
-from django.contrib.localflavor.br.forms import *
 
 class Uf(models.Model):
     nome = models.CharField(max_length=255)
@@ -31,24 +30,26 @@ SEXO_C = (('F','Feminino'),('M','Masculino'),)
 class Cad_produtor(models.Model):
     nome = models.CharField(max_length=255, verbose_name=u'Nome do Produtor')
     sexo = models.CharField(max_length=1, choices=SEXO_C)
-    data_de_nascimento = models.DateField(verbose_name='Data de Nascimento', null=True,  blank=True)
-    cpf = BRCPFField(required=False)
-    rg = models.CharField(max_length=255, null=True, blank=True)
-    telefone = BRPhoneNumberField()
+    data_de_nascimento = models.DateField(verbose_name=u'Data de Nascimento', null=True,  blank=True)
+    cpf = models.CharField(max_length=255, null=True, blank=True, verbose_name=u'CPF')
+    rg = models.CharField(max_length=255, null=True, blank=True, verbose_name=u'RG')
+    telefone = models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField(max_length=255, null=True,  blank=True)
-    uf = models.CharField(max_length=2, blank=True, null=True)
-    municipio = models.ForeignKey(Municipio, blank=True, null=True, verbose_name=u'município')
-    cep = BRZipCodeField()
+    uf = models.ForeignKey(Uf, null=True, blank=True)
+    municipio = models.ForeignKey(Municipio, null=True, blank=True, verbose_name=u'município')
+    cep = models.CharField(max_length=255, null=True, blank=True)
     bairro = models.CharField(max_length=255, blank=True, null=True)
     endereco = models.CharField(max_length=255, verbose_name=u'Endereço', blank=True, null=True)
     numero = models.CharField(max_length=255, verbose_name=u'Número', blank=True, null=True)
     complemento = models.CharField(max_length=255, verbose_name=u'Complemento', blank=True, null=True)
+    data_cadastro = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return self.nome
 
     class Meta:
-        verbose_name = u'01 Cadastro do Produtor'
+        verbose_name = u'Cadastro do Produtor'
         verbose_name_plural = u'01 Cadastro dos Produtores'
 
 #
@@ -65,7 +66,7 @@ class Cad_endereco_propriedade(models.Model):
         return self.nome_propriedade
 
     class Meta:
-        verbose_name = u'02 Cadastro do Endereço da Propriedade'
+        verbose_name = u'Cadastro do Endereço da Propriedade'
         verbose_name_plural = u'02 Cadastro dos Endereços das Propriedades'
 
 #
@@ -76,8 +77,8 @@ class Uso_solo(models.Model):
         return self.nome
 
     class Meta:
-        verbose_name = u'02 | Uso do solo'
-
+        verbose_name = u'Uso do solo'
+        verbose_name_plural = u'02 | Uso do solo'
 #
 class Uso_solo_unidade(models.Model):
     nome = models.CharField(max_length=255, verbose_name=u'Unidade')
@@ -86,8 +87,8 @@ class Uso_solo_unidade(models.Model):
         return self.nome
 
     class Meta:
-        verbose_name = u'02 | Uso do solo - Unidade'
-
+        verbose_name = u'Uso do solo - Unidade'
+        verbose_name_plural = u'02 | Uso do solo - Unidade'
 #
 class Uso_agua(models.Model):
     nome = models.CharField(max_length=255)
@@ -96,8 +97,8 @@ class Uso_agua(models.Model):
         return self.nome
 
     class Meta:
-        verbose_name = u'02 | Uso da Água'
-
+        verbose_name = u'Uso da Água'
+        verbose_name_plural = u'02 | Uso da Água'
 #
 class Criacao(models.Model):
     nome = models.CharField(max_length=255)
@@ -106,8 +107,8 @@ class Criacao(models.Model):
         return self.nome
 
     class Meta:
-        verbose_name = u'02 | Criação'
-
+        verbose_name = u'Criação'
+        verbose_name_plural = u'02 | Criação'
 #
 class Cad_uso(models.Model):
     nome = models.ForeignKey(Uso_solo, related_name=u'uso_solo', verbose_name=u'Uso do Solo', blank=True, null=True)
@@ -120,5 +121,5 @@ class Cad_uso(models.Model):
         return self.numero_area
 
     class Meta:
-        verbose_name = u'02 | Cadastro de Uso do Solo'
-
+        verbose_name = u'Cadastro de Uso do Solo'
+        verbose_name_plural = u'02 | Cadastro de Uso do Solo'
