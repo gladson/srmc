@@ -19,10 +19,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'srmc',                      # Or path to database file if using sqlite3.
-        'USER': 'srmc',                      # Not used with sqlite3.
-        'PASSWORD': 'r7dqfHIVR',                  # Not used with sqlite3.
-        'HOST': 'srmc.mysql.fluxflex.com',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'FLX_DB_NAME',                      # Or path to database file if using sqlite3.
+        'USER': 'FLX_DB_USER',                      # Not used with sqlite3.
+        'PASSWORD': 'FLX_DB_PASS',                  # Not used with sqlite3.
+        'HOST': 'FLX_DB_HOST',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
