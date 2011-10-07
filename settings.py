@@ -7,7 +7,7 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 #sys.path.insert(0, os.path.join(PROJECT_PATH, 'apps'))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
